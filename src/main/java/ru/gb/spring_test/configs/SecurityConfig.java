@@ -1,4 +1,4 @@
-package ru.gb.spring_test.controllers.configs;
+package ru.gb.spring_test.configs;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

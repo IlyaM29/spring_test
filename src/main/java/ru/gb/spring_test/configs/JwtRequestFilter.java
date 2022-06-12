@@ -1,4 +1,4 @@
-package ru.gb.spring_test.controllers.configs;
+package ru.gb.spring_test.configs;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import lombok.RequiredArgsConstructor;
