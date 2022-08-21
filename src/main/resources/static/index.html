@@ -56,18 +56,51 @@
                     <td>ID</td>
                     <td>Название продукта</td>
                     <td>Цена</td>
+                    <td></td>
                 </tr>
                 <tbody>
                 <tr ng-repeat="p in productList">
                     <td>{{p.id}}</td>
                     <td>{{p.title}}</td>
                     <td>{{p.cost}}</td>
+                    <td>
+                        <button class="btn btn-primary" ng-click="addToCart(p.id)">Добавить в корзину</button>
+                    </td>
                 </tr>
                 </tbody>
             </table>
             <div align="center">
                 <span ng-repeat="p in pages"><a href="" class="badge badge-primary" ng-click="loadProduct(p)">{{p}}</a></span>
             </div>
+            <br>
+            <h3>Корзина</h3>
+            <table class="table table-hover">
+                <tr>
+                    <td>Название товара</td>
+                    <td>Количество</td>
+                    <td>Цена</td>
+                    <td></td>
+                </tr>
+                <tbody>
+                <tr ng-repeat="item in Cart.items">
+                    <td>{{item.title}}</td>
+                    <td>{{item.quantity}}</td>
+                    <td>{{item.pricePerProduct + ' x ' + item.quantity + ' = ' + item.price}}</td>
+                    <td>
+                        <button class="btn btn-primary" ng-click="decreaseProduct(item.productId)">Уменьшить</button>
+                        <button class="btn btn-danger" ng-click="removeFromCart(item.productId)">Х</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Итого</td>
+                    <td>{{Cart.totalPrice}}</td>
+                </tr>
+                </tbody>
+            </table>
+            <p>
+                <button class="btn badge-secondary" ng-click="clearCart()">Очистить корзину</button>
+            </p>
         </div>
         <div class="col-md-3">
             <br><br>
