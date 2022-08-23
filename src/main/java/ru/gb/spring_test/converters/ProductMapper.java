@@ -8,7 +8,7 @@ import ru.gb.spring_test.dto.ProductDto;
 import ru.gb.spring_test.entities.Product;
 
 @Mapper
-@Component
+//@Component
 public interface ProductMapper {
     ProductMapper MAPPER = Mappers.getMapper(ProductMapper.class);
 
