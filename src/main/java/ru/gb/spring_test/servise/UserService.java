@@ -54,4 +54,8 @@ public class UserService implements UserDetailsService {
         user.setRoles(List.of(roleRepository.findById(1L).orElseThrow()));
         userRepository.save(user);
     }
+
+    public List<User> findAllUsers() {
+        return userRepository.findAll();
+    }
 }
