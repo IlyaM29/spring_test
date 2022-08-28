@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import ru.gb.spring_test.converters.ProductMapper;
 import ru.gb.spring_test.dto.ProductDto;
 import ru.gb.spring_test.entities.Product;
+import ru.gb.spring_test.entities.User;
 import ru.gb.spring_test.exceptions.ValidateException;
 import ru.gb.spring_test.repositories.ProductRepository;
 import ru.gb.spring_test.repositories.specification.ProductSpecification;
@@ -76,5 +77,9 @@ public class ProductService {
         }
         Product product = productRepository.findById(id).orElseThrow();
         product.setTitle(productDto.getTitle());
+    }
+
+    public List<Product> findAllProducts() {
+        return productRepository.findAll();
     }
 }
