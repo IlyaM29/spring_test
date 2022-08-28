@@ -1,6 +1,7 @@
 package ru.gb.spring_test.servise;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachePut;
@@ -17,14 +18,15 @@ import java.util.Optional;
 public class CartService {
 
     private final ProductService productService;
+    @Qualifier("test")
     private final CacheManager cacheManager;
 
-    @Value("${other.cache.cart}")
+    @Value("${spring.cache.user.name}")
     private String CACHE_CART;
 
     private Cart cart;
 
-    @Cacheable(value = "${other.cache.cart}", key = "#cartName")
+    @Cacheable(value = "Cart", key = "#cartName")
     public Cart getCurrentCart(String cartName) {
         cart = cacheManager.getCache(CACHE_CART).get(cartName, Cart.class);
         if (!Optional.ofNullable(cart).isPresent()) {
@@ -34,31 +36,31 @@ public class CartService {
         return cart;
     }
 
-    @CachePut(value = "${other.cache.cart}", key = "#cartName")
+    @CachePut(value = "Cart", key = "#cartName")
     public Cart addProductByIdToCart(Long id, String cartName) {
         Cart cart = getCurrentCart(cartName);
-        if (!getCurrentCart(cartName).addProductCount(id)) {
+        if (!cart.addProductCount(id)) {
             Product product = ProductMapper.MAPPER.toProduct(productService.findById(id));
             cart.addProduct(product);
         }
         return cart;
     }
 
-    @CachePut(value = "${other.cache.cart}", key = "#cartName")
+    @CachePut(value = "Cart", key = "#cartName")
     public Cart clear(String cartName) {
         Cart cart = getCurrentCart(cartName);
         cart.clear();
         return cart;
     }
 
-    @CachePut(value = "${other.cache.cart}", key = "#cartName")
+    @CachePut(value = "Cart", key = "#cartName")
     public Cart removeProduct(Long id, String cartName) {
         Cart cart = getCurrentCart(cartName);
         cart.removeProduct(id);
         return cart;
     }
 
-    @CachePut(value = "${other.cache.cart}", key = "#cartName")
+    @CachePut(value = "Cart", key = "#cartName")
     public Cart decreaseProduct(Long id, String cartName) {
         Cart cart = getCurrentCart(cartName);
         cart.decreaseProduct(id);

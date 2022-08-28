@@ -13,6 +13,14 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQL94Dialect
-other:
+  redis:
+    database: 0
+    host: localhost
+    port: 6379
+    password:
   cache:
-    cart: Cart
+    default:
+      expire-time: 700000000
+    user:
+      expire-time: 100
+      name: "Cart"

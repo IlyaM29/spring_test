@@ -18,16 +18,21 @@ public class Cart {
         this.items = new ArrayList<>();
     }
 
-    public Cart(String cartName, CacheManager manager) {
-        Cart cart = manager.getCache("Cart").get(cartName, Cart.class);
-        if (Optional.ofNullable(cart).isPresent()) {
-            this.items = cart.getItems();
-            this.totalPrice = cart.getTotalPrice();
-        } else {
-            this.items = new ArrayList<>();
-            this.totalPrice = 0;
-            manager.getCache("Cart").put(cartName, Cart.class);
-        }
+//    public Cart(String cartName, CacheManager manager) {
+//        Cart cart = manager.getCache("Cart").get(cartName, Cart.class);
+//        if (Optional.ofNullable(cart).isPresent()) {
+//            this.items = cart.getItems();
+//            this.totalPrice = cart.getTotalPrice();
+//        } else {
+//            this.items = new ArrayList<>();
+//            this.totalPrice = 0;
+//            manager.getCache("Cart").put(cartName, Cart.class);
+//        }
+//    }
+
+    public Cart(String cartName, CacheManager manager){
+        this.items = new ArrayList<>();
+        this.totalPrice = 0;
     }
 
     public boolean addProductCount(Long id) {

@@ -2,10 +2,12 @@ package ru.gb.spring_test.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import ru.gb.spring_test.entities.Product;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class OrderItemDto {
     private Long productId;
     private String title;
