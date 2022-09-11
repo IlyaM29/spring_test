@@ -1,0 +1,38 @@
+<div class="row">
+    <div class="col-md-4">
+        <p></p>
+        <h4>Фильтр</h4>
+        <form novalidate ng-submit="loadProduct()">
+            <div>
+                <input class="form-control" type="text" placeholder="Название" ng-model="title">
+                <p></p>
+                <p>Цена:</p>
+                <div class="row">
+                    <div class="col-md-12 col-sm-6">
+                        <input class="form-control" type="number" placeholder="min" ng-model="min">
+                    </div>
+                    <div class="col-md-12 col-sm-6">
+                        <input class="form-control" type="number" placeholder="max" ng-model="max">
+                    </div>
+                </div>
+                <p></p>
+                <button type="submit" class="btn btn-primary">Применить</button>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-8 order-md-first">
+        <p></p>
+        <h3>Список продуктов</h3>
+        <div class="item" ng-repeat="p in productList">
+            <ion-icon name="cube"></ion-icon>
+            <div>
+                <h2>{{p.title}}</h2>
+                <p>Цена товара: {{p.cost}}</p>
+                <button class="btn btn-outline-primary" ng-click="addToCart(p.id)">Добавить в корзину</button>
+            </div>
+        </div>
+        <div class="pagination">
+            <span ng-repeat="p in pages"><a href="" class="badge badge-secondary" ng-click="loadProduct(p)">{{p}}</a></span>
+        </div>
+    </div>
+</div>
