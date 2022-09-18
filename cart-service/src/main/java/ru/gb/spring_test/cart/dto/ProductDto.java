@@ -1,4 +1,4 @@
-package ru.gb.spring_test.dto;
+package ru.gb.spring_test.cart.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,11 +9,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UserDto {
+public class ProductDto {
 
-    private String username;
+    private Long id;
+    private String title;
+    private Integer cost;
 
-    private String password;
-
-    private String email;
 }

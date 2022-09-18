@@ -1,4 +1,4 @@
-package ru.gb.spring_test.servise;
+package ru.gb.spring_test.cart.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -7,9 +7,9 @@ import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-import ru.gb.spring_test.converters.ProductMapper;
-import ru.gb.spring_test.dto.Cart;
-import ru.gb.spring_test.entities.Product;
+import org.springframework.web.client.RestTemplate;
+import ru.gb.spring_test.cart.dto.ProductDto;
+import ru.gb.spring_test.cart.entities.Cart;
 
 import java.util.Optional;
 
@@ -17,9 +17,10 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class CartService {
 
-    private final ProductService productService;
     @Qualifier("test")
     private final CacheManager cacheManager;
+
+    private final RestTemplate restTemplate;
 
     @Value("${spring.cache.user.name}")
     private String CACHE_CART;
@@ -40,7 +41,7 @@ public class CartService {
     public Cart addProductByIdToCart(Long id, String cartName) {
         Cart cart = getCurrentCart(cartName);
         if (!cart.addProductCount(id)) {
-            Product product = ProductMapper.MAPPER.toProduct(productService.findById(id));
+            ProductDto product = restTemplate.getForObject("http://localhost:8189/web-market-core/api/v1/products/" + id, ProductDto.class);
             cart.addProduct(product);
         }
         return cart;

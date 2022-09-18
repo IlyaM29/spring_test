@@ -2,6 +2,7 @@ package ru.gb.spring_test.servise;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 import ru.gb.spring_test.converters.ProductMapper;
 import ru.gb.spring_test.dto.Cart;
 import ru.gb.spring_test.dto.OrderDetailsDto;
@@ -9,6 +10,7 @@ import ru.gb.spring_test.entities.Order;
 import ru.gb.spring_test.entities.OrderItem;
 import ru.gb.spring_test.repositories.OrderRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,11 +19,11 @@ import java.util.stream.Collectors;
 public class OrderService {
 
     private final ProductService productService;
-    private final CartService cartService;
+    private final RestTemplate restTemplate;
     private final OrderRepository orderRepository;
 
     public void createOrder(String username, OrderDetailsDto orderDetailsDto, String cartName) {
-        Cart currentCart = cartService.getCurrentCart(cartName);
+        Cart currentCart = restTemplate.postForObject("http://localhost:8187/web-market-cart/api/v1/carts", cartName, Cart.class);
         Order order = new Order();
         order.setAddress(orderDetailsDto.getAddress());
         order.setPhone(orderDetailsDto.getPhone());
@@ -43,6 +45,10 @@ public class OrderService {
     }
 
     public List<Order> findOrdersByUsername(String username) {
-        return orderRepository.findByUsername(username);
+        try {
+            return orderRepository.findByUsername(username);
+        } catch (Exception e) {
+            return new ArrayList<>();
+        }
     }
 }

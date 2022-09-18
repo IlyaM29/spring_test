@@ -1,8 +1,8 @@
 angular.module('market-front').controller('cartController', function ($scope, $rootScope, $http, $localStorage) {
-    const contextPath = 'http://localhost:5555/gateway';
+    const contextPath = 'http://localhost:5555';
 
     $scope.loadCart = function () {
-        $http.post(contextPath + '/api/v1/carts', $localStorage.cartName)
+        $http.post(contextPath + '/cart/api/v1/carts', $localStorage.cartName)
             .then(function (response) {
                 $scope.Cart = response.data;
                 console.log($scope.Cart);
@@ -11,21 +11,21 @@ angular.module('market-front').controller('cartController', function ($scope, $r
     $scope.loadCart();
 
     $scope.clearCart = function () {
-        $http.post(contextPath + '/api/v1/carts/clear', $localStorage.cartName)
+        $http.post(contextPath + '/cart/api/v1/carts/clear', $localStorage.cartName)
             .then(function () {
                 $scope.loadCart()
             });
     };
 
     $scope.removeFromCart = function (productId) {
-        $http.post(contextPath + '/api/v1/carts/remove/' + productId, $localStorage.cartName)
+        $http.post(contextPath + '/cart/api/v1/carts/remove/' + productId, $localStorage.cartName)
             .then(function () {
                 $scope.loadCart()
             });
     };
 
     $scope.decreaseProduct = function (productId) {
-        $http.post(contextPath + '/api/v1/carts/decrease/' + productId, $localStorage.cartName)
+        $http.post(contextPath + '/cart/api/v1/carts/decrease/' + productId, $localStorage.cartName)
             .then(function () {
                 $scope.loadCart()
             });
@@ -33,7 +33,7 @@ angular.module('market-front').controller('cartController', function ($scope, $r
 
     $scope.checkOut = function () {
         $http({
-            url: contextPath + '/orders/' + $localStorage.cartName,
+            url: contextPath + '/gateway/api/v1/orders/' + $localStorage.cartName,
             method: 'POST',
             data: {orderDetailsDto: $scope.orderDetails}
         }).then(function () {

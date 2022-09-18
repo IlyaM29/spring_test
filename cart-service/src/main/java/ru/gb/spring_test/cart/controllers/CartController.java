@@ -1,10 +1,9 @@
-package ru.gb.spring_test.controllers;
+package ru.gb.spring_test.cart.controllers;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.cache.CacheManager;
 import org.springframework.web.bind.annotation.*;
-import ru.gb.spring_test.dto.Cart;
-import ru.gb.spring_test.servise.CartService;
+import ru.gb.spring_test.cart.entities.Cart;
+import ru.gb.spring_test.cart.services.CartService;
 
 @RestController
 @RequestMapping("/api/v1/carts")

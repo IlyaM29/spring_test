@@ -8,6 +8,7 @@
         <module>core-service</module>
         <module>gateway-service</module>
         <module>auth-service</module>
+        <module>cart-service</module>
     </modules>
 
     <parent>
@@ -43,15 +44,7 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-redis</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>redis.clients</groupId>
-            <artifactId>jedis</artifactId>
-            <version>3.6.0</version>
-        </dependency>
+
 
 <!--        <dependency>-->
 <!--            <groupId>org.aspectj</groupId>-->

@@ -1,10 +1,10 @@
 angular.module('market-front').controller('storeController', function ($scope, $rootScope, $http, $localStorage) {
-    const contextPath = 'http://localhost:5555/gateway';
+    const contextPath = 'http://localhost:5555';
 
     $scope.pages = [];
     $scope.loadProduct = function (p){
         $http({
-            url: contextPath + '/api/v1/products',
+            url: contextPath + '/gateway/api/v1/products',
             method: 'GET',
             params: {
                 page: p,
@@ -24,7 +24,7 @@ angular.module('market-front').controller('storeController', function ($scope, $
     $scope.loadProduct();
 
     $scope.addToCart = function (productId) {
-        $http.post(contextPath + '/api/v1/carts/add/' + productId, $localStorage.cartName)
+        $http.post(contextPath + '/cart/api/v1/carts/add/' + productId, $localStorage.cartName)
             .then(function () {
             });
     };
