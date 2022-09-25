@@ -1,0 +1,28 @@
+<div class="row">
+    <div class="col-md-8">
+        <p></p>
+        <h3>Мои заказы</h3>
+        <div class="item" ng-repeat="order in MyOrders">
+            <ion-icon name="cube"></ion-icon>
+            <div>
+                <h2>ID: {{order.id}}</h2>
+                <p>Адрес доставки: {{order.address}}</p>
+                <p>Стоимость: {{order.totalPrice}}</p>
+            </div>
+        </div>
+    <!--    <table class="table table-hover">-->
+    <!--        <tr>-->
+    <!--            <td>ID</td>-->
+    <!--            <td>Адрес доставки</td>-->
+    <!--            <td>Стоимость</td>-->
+    <!--        </tr>-->
+    <!--        <tbody>-->
+    <!--        <tr ng-repeat="order in MyOrders">-->
+    <!--            <td>{{order.id}}</td>-->
+    <!--            <td>{{order.address}}</td>-->
+    <!--            <td>{{order.totalPrice}}</td>-->
+    <!--        </tr>-->
+    <!--        </tbody>-->
+    <!--    </table>-->
+    </div>
+</div>
