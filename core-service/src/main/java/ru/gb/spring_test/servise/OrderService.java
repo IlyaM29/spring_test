@@ -1,10 +1,12 @@
 package ru.gb.spring_test.servise;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import ru.gb.spring_test.converters.ProductMapper;
 import ru.gb.spring_test.dto.Cart;
+import ru.gb.spring_test.dto.FullOrderDetailsDto;
 import ru.gb.spring_test.dto.OrderDetailsDto;
 import ru.gb.spring_test.entities.Order;
 import ru.gb.spring_test.entities.OrderItem;
@@ -22,6 +24,12 @@ public class OrderService {
     private final RestTemplate restTemplate;
     private final OrderRepository orderRepository;
 
+    @KafkaListener(topics = "OrdersTopic")
+    public void orderListener(FullOrderDetailsDto fullOrderDetailsDto) {
+        createOrder(fullOrderDetailsDto.getUsername(),
+                fullOrderDetailsDto.getOrderDetailsDto(),
+                fullOrderDetailsDto.getCartName());
+    }
     public void createOrder(String username, OrderDetailsDto orderDetailsDto, String cartName) {
         Cart currentCart = restTemplate.postForObject("http://localhost:8187/web-market-cart/api/v1/carts", cartName, Cart.class);
         Order order = new Order();
@@ -42,6 +50,7 @@ public class OrderService {
         order.setItems(items);
         orderRepository.save(order);
         currentCart.clear();
+        restTemplate.postForObject("http://localhost:8187/web-market-cart/api/v1/carts/clear", cartName, Cart.class);
     }
 
     public List<Order> findOrdersByUsername(String username) {

@@ -35,10 +35,13 @@ angular.module('market-front').controller('cartController', function ($scope, $r
         $http({
             url: contextPath + '/gateway/api/v1/orders/' + $localStorage.cartName,
             method: 'POST',
-            data: {orderDetailsDto: $scope.orderDetails}
+            data: {
+                orderDetailsDto: $scope.orderDetails
+            }
         }).then(function () {
             $scope.loadCart();
-            $scope.orderDetails = null
+            console.log({orderDetailsDto: $scope.orderDetails});
+            $scope.orderDetails = null;
         });
     };
 

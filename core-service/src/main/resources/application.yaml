@@ -13,17 +13,7 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQL94Dialect
-#  redis:
-#    database: 0
-#    host: localhost
-#    port: 6379
-#    password:
-#  cache:
-#    default:
-#      expire-time: 700000000
-#    user:
-#      expire-time: 100
-#      name: "Cart"
-#other:
-#  cache:
-#    cart: "Cart"
+  kafka:
+    consumer:
+      group-id: 123
+    bootstrap-servers: localhost:9092
