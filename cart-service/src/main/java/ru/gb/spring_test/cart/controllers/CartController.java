@@ -1,0 +1,46 @@
+package ru.gb.spring_test.cart.controllers;
+
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
+import ru.gb.spring_test.cart.dto.OrderDetailsDto;
+import ru.gb.spring_test.cart.entities.Cart;
+import ru.gb.spring_test.cart.services.CartService;
+
+@RestController
+@RequestMapping("/api/v1/carts")
+@RequiredArgsConstructor
+public class CartController {
+
+    private final CartService service;
+
+    @PostMapping("/createOrder/{cartName}")
+    public void createOrder(@RequestHeader String username, @RequestBody OrderDetailsDto orderDetailsDto, @PathVariable String cartName){
+        System.out.println("controller: " + username + " " + orderDetailsDto);
+        service.createOrder(username, orderDetailsDto, cartName);
+    }
+
+    @PostMapping
+    public Cart getCurrentCart(@RequestBody String cartName) {
+        return service.getCurrentCart(cartName);
+    }
+
+    @PostMapping("/add/{id}")
+    public void addProductToCart(@PathVariable Long id, @RequestBody String cartName) {
+        service.addProductByIdToCart(id, cartName);
+    }
+
+    @PostMapping("/clear")
+    public void clearCart(@RequestBody String cartName) {
+        service.clear(cartName);
+    }
+
+    @PostMapping("/remove/{id}")
+    public void removeProduct(@PathVariable Long id, @RequestBody String cartName) {
+        service.removeProduct(id, cartName);
+    }
+
+    @PostMapping("/decrease/{id}")
+    public void decreaseProduct(@PathVariable Long id, @RequestBody String cartName) {
+        service.decreaseProduct(id, cartName);
+    }
+}

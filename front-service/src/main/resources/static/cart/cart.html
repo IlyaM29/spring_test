@@ -1,0 +1,32 @@
+<div class="row">
+    <div class="col-md-8">
+        <p></p>
+        <h3>Корзина</h3>
+        <div class="item" ng-repeat="item in Cart.items">
+            <ion-icon name="cube"></ion-icon>
+            <div>
+                <h2>{{item.title}}</h2>
+                <p>Количество: {{item.quantity}}</p>
+                <p>Цена: {{item.pricePerProduct + ' x ' + item.quantity + ' = ' + item.price}}</p>
+                <button class="btn btn-outline-primary" ng-click="decreaseProduct(item.productId)">Уменьшить</button>
+                <button class="btn btn-outline-danger" ng-click="removeFromCart(item.productId)">Х</button>
+            </div>
+        </div>
+        <div class="item">
+            <p>Итого: {{Cart.totalPrice}}</p>
+        </div>
+        <p>
+            <button class="btn btn-outline-secondary" ng-click="clearCart()">Очистить корзину</button>
+        </p>
+        <br>
+        <h3>Детали заказа</h3>
+        <form novalidate>
+            <input class="form-control" type="text" placeholder="Номер телефона получателя" ng-model="orderDetailsDto.phone">
+            <p></p>
+            <input class="form-control" type="text" placeholder="Адрес доставки" ng-model="orderDetailsDto.address">
+            <p></p>
+        </form>
+        <button class="btn btn-primary" ng-click="checkOut()" ng-show="isUserLoggedIn() && Cart.items.length > 0">Оформить заказ</button>
+        <button class="btn btn-secondary" ng-click="disabledCheckOut()" ng-show="!isUserLoggedIn() && Cart.items.length > 0">Оформить заказ</button>
+    </div>
+</div>
