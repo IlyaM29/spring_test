@@ -21,9 +21,9 @@
         <br>
         <h3>Детали заказа</h3>
         <form novalidate>
-            <input class="form-control" type="text" placeholder="Номер телефона получателя" ng-model="orderDetails.phone">
+            <input class="form-control" type="text" placeholder="Номер телефона получателя" ng-model="orderDetailsDto.phone">
             <p></p>
-            <input class="form-control" type="text" placeholder="Адрес доставки" ng-model="orderDetails.address">
+            <input class="form-control" type="text" placeholder="Адрес доставки" ng-model="orderDetailsDto.address">
             <p></p>
         </form>
         <button class="btn btn-primary" ng-click="checkOut()" ng-show="isUserLoggedIn() && Cart.items.length > 0">Оформить заказ</button>

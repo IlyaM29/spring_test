@@ -4,8 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import ru.gb.spring_test.dto.ProductDto;
-import ru.gb.spring_test.entities.Product;
-import ru.gb.spring_test.servise.ProductService;
+import ru.gb.spring_test.services.ProductService;
 
 @RestController
 @RequestMapping("/api/v1/products")

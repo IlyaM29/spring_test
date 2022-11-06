@@ -14,7 +14,7 @@ public class AppLoggingAOP {
 
     public Statistic statistic = new Statistic();
 
-    @Around("execution(public * ru.gb.spring_test.servise.*.*(..))")
+    @Around("execution(public * ru.gb.spring_test.services.*.*(..))")
     public Object durationServices(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         long begin = System.currentTimeMillis();
         Object out = proceedingJoinPoint.proceed();

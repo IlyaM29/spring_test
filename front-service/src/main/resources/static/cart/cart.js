@@ -33,15 +33,13 @@ angular.module('market-front').controller('cartController', function ($scope, $r
 
     $scope.checkOut = function () {
         $http({
-            url: contextPath + '/gateway/api/v1/orders/' + $localStorage.cartName,
+            url: contextPath + '/cart/api/v1/carts/createOrder/' + $localStorage.cartName,
             method: 'POST',
-            data: {
-                orderDetailsDto: $scope.orderDetails
-            }
+            data: $scope.orderDetailsDto
         }).then(function () {
             $scope.loadCart();
-            console.log({orderDetailsDto: $scope.orderDetails});
-            $scope.orderDetails = null;
+            console.log($scope.orderDetailsDto);
+            $scope.orderDetailsDto = null;
         });
     };
 

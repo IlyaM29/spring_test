@@ -14,3 +14,7 @@ spring:
     user:
       expire-time: 3600
       name: "Cart"
+  kafka:
+    consumer:
+      group-id: 123
+    bootstrap-servers: localhost:9092

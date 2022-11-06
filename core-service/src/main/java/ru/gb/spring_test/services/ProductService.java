@@ -1,4 +1,4 @@
-package ru.gb.spring_test.servise;
+package ru.gb.spring_test.services;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

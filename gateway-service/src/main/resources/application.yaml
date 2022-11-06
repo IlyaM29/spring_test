@@ -23,6 +23,14 @@ spring:
             - StripPrefix=1
             - PrefixPath=/web-market-core
             - JwtAuthFilter
+        - id: order-service
+          uri: http://localhost:8186/
+          predicates:
+            - Path=/order/**
+          filters:
+            - StripPrefix=1
+            - PrefixPath=/web-market-order
+            - JwtAuthFilter
         - id: cart-service
           uri: http://localhost:8187/
           predicates:

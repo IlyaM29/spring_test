@@ -2,6 +2,7 @@ package ru.gb.spring_test.cart.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import ru.gb.spring_test.cart.dto.OrderDetailsDto;
 import ru.gb.spring_test.cart.entities.Cart;
 import ru.gb.spring_test.cart.services.CartService;
 
@@ -11,6 +12,12 @@ import ru.gb.spring_test.cart.services.CartService;
 public class CartController {
 
     private final CartService service;
+
+    @PostMapping("/createOrder/{cartName}")
+    public void createOrder(@RequestHeader String username, @RequestBody OrderDetailsDto orderDetailsDto, @PathVariable String cartName){
+        System.out.println("controller: " + username + " " + orderDetailsDto);
+        service.createOrder(username, orderDetailsDto, cartName);
+    }
 
     @PostMapping
     public Cart getCurrentCart(@RequestBody String cartName) {

@@ -9,6 +9,7 @@
         <module>gateway-service</module>
         <module>auth-service</module>
         <module>cart-service</module>
+        <module>order-service</module>
     </modules>
 
     <parent>
